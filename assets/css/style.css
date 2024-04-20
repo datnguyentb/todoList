@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.done-icon {
+  display: none;
+}
+
+#main .container {
+  background-image: linear-gradient(117deg, #5a4be7, #c86dd7 102%);
+  height: 1000px;
+}
+#main .container .cover {
+  max-width: 500px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px 30px;
+  background-color: #fff;
+}
+#main .container .cover .header h1 {
+  text-align: center;
+}
+#main .container .cover .add-todo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+#main .container .cover .add-todo input {
+  width: 100%;
+  height: 40px;
+  padding: 10px 20px;
+  font-size: 18px;
+  margin-right: 5px;
+  text-align: center;
+  border: 2px solid #000;
+  -webkit-transition: 0.3s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 5px;
+}
+#main .container .cover .add-todo input:focus {
+  border: 3px solid #FBA834;
+}
+#main .container .cover .add-todo button {
+  width: 55px;
+  height: 40px;
+  background-color: #333A73;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#main .container .cover .todoList h3 {
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  font-size: 15px;
+  display: none;
+}
+#main .container .cover .todoList .item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background-color: rgba(94, 197, 223, 0.3);
+  border-top: 0.7px solid #ccc;
+  border-bottom: 0.7px solid #ccc;
+}
+#main .container .cover .todoList .item .left {
+  display: flex;
+  align-items: center;
+}
+#main .container .cover .todoList .item .left input {
+  width: 18px;
+  height: 18px;
+}
+#main .container .cover .todoList .item .left p {
+  margin-left: 10px;
+}
+#main .container .cover .todoList .item .left .done {
+  text-decoration: line-through;
+}
+#main .container .cover .todoList .item .right {
+  display: flex;
+  align-items: center;
+}
+#main .container .cover .todoList .item .right i {
+  font-size: 14px;
+  color: rgba(94, 197, 223, 0.7);
+  margin-left: 10px;
+}
+#main .container .cover .todoList .item .right .edit {
+  font-size: 12px;
+}
+#main .container .cover .footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  height: 30px;
+}
+#main .container .cover .footer .left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100%;
+  border: 0.5px solid #ccc;
+  text-align: center;
+  background: linear-gradient(to right, #FFF455 50%, #ffffff 50%);
+}
+#main .container .cover .footer .right {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-color: #333A73;
+  padding: 0 10px;
+  cursor: pointer;
+}
+#main .container .cover .footer .right p {
+  margin-left: 5px;
+}
+#main .container .cover .footer .right i {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */
