@@ -85,9 +85,12 @@ body {
 }
 #main .container .cover .todoList .item .left p {
   margin-left: 10px;
+  font-weight: 500;
 }
 #main .container .cover .todoList .item .left .done {
   text-decoration: line-through;
+  opacity: 0.7;
+  font-weight: 400;
 }
 #main .container .cover .todoList .item .right {
   display: flex;
@@ -97,6 +100,7 @@ body {
   font-size: 14px;
   color: rgba(94, 197, 223, 0.7);
   margin-left: 10px;
+  cursor: pointer;
 }
 #main .container .cover .todoList .item .right .edit {
   font-size: 12px;
@@ -115,7 +119,6 @@ body {
   height: 100%;
   border: 0.5px solid #ccc;
   text-align: center;
-  background: linear-gradient(to right, #FFF455 50%, #ffffff 50%);
 }
 #main .container .cover .footer .right {
   display: flex;

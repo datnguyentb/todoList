@@ -3,6 +3,7 @@ let add_todo = document.querySelector(".add-todo button");
 let todo_list = document.querySelector(".todoList .items");
 let left_box_footer = document.querySelector(".footer .left p")
 let finish_percent = document.querySelector(".footer .left")
+let no_task_box = document.querySelector(".todoList h3")
 let right = document.querySelector(".footer button")
 
 var tasksContainer = { tasks: [] };
@@ -19,8 +20,9 @@ var reloadDOM = (tasks) => {
     let number_todo_finish = 0;
     let tasks_length = tasksContainer.tasks.length
     if(tasks_length == 0) {
-
+        no_task_box.style.display = "block";
     } else {
+        no_task_box.style.display = "none";
         tasksContainer.tasks.forEach((todo, index) => {
             if(todo.isFinish == true) {
                 number_todo_finish++;
@@ -42,7 +44,12 @@ var reloadDOM = (tasks) => {
     }
     todo_list.innerHTML = html_todo;
     left_box_footer.innerHTML = `<strong>${number_todo_finish}</strong> of <strong>${tasks_length}</strong> tasks done`;
-    // finish_percent.style.background = `linear-gradient(to right, #FFF455 ${}%, #ffffff 50%);`
+    let color_percent = (number_todo_finish/tasks_length)*100
+    if(!color_percent) {
+        finish_percent.style.background = `white`
+    } else{
+        finish_percent.style.background = `linear-gradient(to right, #FFF455 ${color_percent}%, #ffffff ${color_percent}%)`
+    }
     if(start == 1) {
         var tasksJSON = JSON.stringify(tasksContainer.tasks);
         localStorage.setItem('tasks', tasksJSON);
@@ -52,13 +59,23 @@ var reloadDOM = (tasks) => {
     let checkboxs = document.querySelectorAll(".todoList .items .input")
     checkboxs.forEach((checkbox, index)=> {
         checkbox.addEventListener('change', ()=> {
-            console.log("hi")
             if(checkbox.checked) {
                 tasksContainer.tasks[index].isFinish = true;
             } else {
                 tasksContainer.tasks[index].isFinish = false;
             }
             reloadDOM(tasksContainer);
+        })
+    })
+
+    let remove_todo = document.querySelectorAll(".todoList .items .right .remove");
+    remove_todo.forEach((todo, index)=> {
+        todo.addEventListener('click', ()=> {
+            var Confirm =  confirm(`Are you sure you want to remove "${todo.name}" from the list?`)
+            if(Confirm) {
+                tasksContainer.tasks.splice(index, 1);
+                reloadDOM(tasksContainer);
+            }
         })
     })
 
