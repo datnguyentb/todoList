@@ -12,23 +12,30 @@ var user_name = {name: ""}
 
 document.addEventListener("DOMContentLoaded", function(event) {
     if(!localStorage.getItem("visited")) {
-        user_name.name = prompt("What is your name?(not fullname)");
+        while(true) {
+            user_name.name = prompt("What is your name?(not fullname)");
+            if(user_name.name) {
+                break;
+            }
+        }
         alert(`Xin chào ${user_name.name} đến với ứng dụng todoList của mình! Chúc bạn có trải nghiệm tốt^^.`)
         if(user_name.name.toLowerCase() == "quynh" || user_name.name.toLowerCase() == "quỳnh") {
             alert("À mà khoan riêng Quỳnh anh hỏi thêm nữa mới được vào nhé 🤪")
-            var pin = prompt("Nhập mã pin: ")
-            if(pin == "1999") {
-                while(true) {
-                    var isHandsome = confirm("Anh có đẹp trai không?")
-                    if(isHandsome == true) {
-                        alert("Yêu em 😘😘😘")
-                        break;
-                    } else {
-                        alert("Saiiiiiiiiiiiiiiiiiiiiiii")
-                    }
+            while(true) {
+                var pin = prompt("Nhập mã pin: ")
+                if(pin == 1999) {
+                    break;
                 }
             }
-    
+            while(true) {
+                var isHandsome = confirm("Anh có đẹp trai không?")
+                if(isHandsome == true) {
+                    alert("Yêu em 😘😘😘")
+                    break;
+                } else {
+                    alert("Saiiiiiiiiiiiiiiiiiiiiiii")
+                }
+            }
         }
         header.innerText = `TODOLIST Của ${user_name.name}`;
         localStorage.setItem("visited", "true");
