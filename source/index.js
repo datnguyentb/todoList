@@ -12,7 +12,7 @@ var user_name = {name: ""}
 
 document.addEventListener("DOMContentLoaded", function(event) {
     if(!localStorage.getItem("visited")) {
-        user_name.name = prompt("Xin hỏi thí chủ tên là gì ^^");
+        user_name.name = prompt("What is your name?(not fullname)");
         alert(`Xin chào ${user_name.name} đến với ứng dụng todoList của mình! Chúc bạn có trải nghiệm tốt^^.`)
         if(user_name.name.toLowerCase() == "quynh" || user_name.name.toLowerCase() == "quỳnh") {
             alert("À mà khoan riêng Quỳnh anh hỏi thêm nữa mới được vào nhé 🤪")
