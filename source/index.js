@@ -80,7 +80,7 @@ var reloadDOM = (tasks) => {
             </div>`
         })
     }
-    header.innerText = `TODOLIST Của ${user_name.name}`;   
+    header.innerText = `Todolist Của ${user_name.name}`;   
     todo_list.innerHTML = html_todo;
     left_box_footer.innerHTML = `<strong>${number_todo_finish}</strong> of <strong>${tasks_length}</strong> tasks done`;
     let color_percent = (number_todo_finish/tasks_length)*100
@@ -110,7 +110,7 @@ var reloadDOM = (tasks) => {
     let remove_todo = document.querySelectorAll(".todoList .items .right .remove");
     remove_todo.forEach((todo, index)=> {
         todo.addEventListener('click', ()=> {
-            var Confirm =  confirm(`Are you sure you want to remove "${todo.name}" from the list?`)
+            var Confirm =  confirm(`Are you sure you want to remove "${tasksContainer.tasks[index].name}" from the list?`)
             if(Confirm) {
                 tasksContainer.tasks.splice(index, 1);
                 reloadDOM(tasksContainer);
@@ -118,6 +118,25 @@ var reloadDOM = (tasks) => {
         })
     })
 
+    //Edit todo
+    // let edit_todo = document.querySelectorAll(".todoList .items .right .edit");
+    // let todo_content = document.querySelectorAll(".todoList .items .left p");
+    // let done_icon = document.querySelectorAll(".todoList .items .right .done-icon")
+    // edit_todo.forEach((todo, index) => {
+    //     todo.addEventListener('click', () => {
+    //         todo.style.display = "none"
+    //         done_icon[index].style.display = "block";
+    //         todo_content[index].contentEditable = true;
+    //         todo_content[index].focus();
+    //         done_icon[index].onclick = () => {
+    //             tasksContainer.tasks[index].name = todo_content[index].textContent;
+    //             todo_content[index].contentEditable = false;
+    //             todo.style.display = "block";
+    //             done_icon[index].style.display = "none";
+    //         }
+    //         // reloadDOM(tasksContainer)
+    //     })
+    // })
 }
 
 
@@ -130,6 +149,21 @@ right.onclick = () => {
     reloadDOM(tasksContainer)
 }
 
+input_value.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        if(input_value.value) {
+            tasksContainer.tasks.push(
+                {
+                    name: input_value.value,
+                    isFinish: false
+                }
+            )
+        }
+        input_value.value = ""
+        reloadDOM(tasksContainer)
+    }
+});
+
 add_todo.onclick = () => {
     if(input_value.value) {
         tasksContainer.tasks.push(
@@ -141,5 +175,5 @@ add_todo.onclick = () => {
     }
     input_value.value = ""
     reloadDOM(tasksContainer)
-    // console.log(tasks)
 }
+

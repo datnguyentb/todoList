@@ -9,6 +9,10 @@ body {
 }
 
 .done-icon {
+  color: white !important;
+  font-size: 16px !important;
+  background-color: #0ba751;
+  padding: 2px;
   display: none;
 }
 
@@ -89,6 +93,10 @@ body {
 #main .container .cover .todoList .item .left p {
   margin-left: 10px;
   font-weight: 500;
+}
+#main .container .cover .todoList .item .left p[contenteditable]:focus {
+  border: 1px solid blue !important;
+  width: 100%;
 }
 #main .container .cover .todoList .item .left .done {
   text-decoration: line-through;
