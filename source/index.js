@@ -1,39 +1,27 @@
-// var tasks = [
-//     {
-//         name: "Quet nha",
-//         isFinish: false
-//     },
-//     {
-//         name: "Giat do",
-//         isFinish: false
-//     },
-//     {
-//         name: "rua bat",
-//         isFinish: true
-//     }
-// ];
-
 let input_value = document.querySelector(".add-todo input");
 let add_todo = document.querySelector(".add-todo button");
 let todo_list = document.querySelector(".todoList .items");
 let left_box_footer = document.querySelector(".footer .left p")
+let finish_percent = document.querySelector(".footer .left")
 let right = document.querySelector(".footer button")
+
+var tasksContainer = { tasks: [] };
 
 
 var reloadDOM = (tasks) => {
     if(start == 0) {
         var tasksJSON = localStorage.getItem('tasks');
-        if(JSON.parse(tasksJSON)) {
-            tasks = JSON.parse(tasksJSON);
+        if(tasksJSON) {
+            tasksContainer.tasks = JSON.parse(tasksJSON); 
         }
     }
     let html_todo = "";
     let number_todo_finish = 0;
-    let tasks_length = tasks.length
+    let tasks_length = tasksContainer.tasks.length
     if(tasks_length == 0) {
 
     } else {
-        tasks.forEach((todo, index) => {
+        tasksContainer.tasks.forEach((todo, index) => {
             if(todo.isFinish == true) {
                 number_todo_finish++;
             }
@@ -53,37 +41,40 @@ var reloadDOM = (tasks) => {
         })
     }
     todo_list.innerHTML = html_todo;
-    left_box_footer.innerHTML = `<strong>${number_todo_finish}</strong> of <strong>${tasks_length}</strong> tasks done`
+    left_box_footer.innerHTML = `<strong>${number_todo_finish}</strong> of <strong>${tasks_length}</strong> tasks done`;
+    // finish_percent.style.background = `linear-gradient(to right, #FFF455 ${}%, #ffffff 50%);`
     if(start == 1) {
-        var tasksJSON = JSON.stringify(tasks);
+        var tasksJSON = JSON.stringify(tasksContainer.tasks);
         localStorage.setItem('tasks', tasksJSON);
     }
     start = 1;
+
+    let checkboxs = document.querySelectorAll(".todoList .items .input")
+    checkboxs.forEach((checkbox, index)=> {
+        checkbox.addEventListener('change', ()=> {
+            console.log("hi")
+            if(checkbox.checked) {
+                tasksContainer.tasks[index].isFinish = true;
+            } else {
+                tasksContainer.tasks[index].isFinish = false;
+            }
+            reloadDOM(tasksContainer);
+        })
+    })
+
 }
 
 let start = 0;
-var tasks = []
-reloadDOM();
-let checkboxs = document.querySelectorAll(".todoList .items .input")
-checkboxs.forEach((checkbox, index)=> {
-    checkbox.onclick = ()=> {
-        if(checkbox.checked) {
-            tasks[index].isFinish = false;
-        } else {
-            tasks[index].isFinish = true;
-        }
-        reloadDOM(tasks);
-    }
-})
+reloadDOM(tasksContainer);
 
 right.onclick = () => {
-    tasks = tasks.filter((task) => !task.isFinish)
-    reloadDOM(tasks)
+    tasksContainer.tasks = tasksContainer.tasks.filter((task) => !task.isFinish)
+    reloadDOM(tasksContainer)
 }
 
 add_todo.onclick = () => {
     if(input_value.value) {
-        tasks.push(
+        tasksContainer.tasks.push(
             {
                 name: input_value.value,
                 isFinish: false
@@ -91,6 +82,6 @@ add_todo.onclick = () => {
         )
     }
     input_value.value = ""
-    reloadDOM(tasks)
+    reloadDOM(tasksContainer)
     // console.log(tasks)
 }
