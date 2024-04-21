@@ -1,3 +1,4 @@
+let header = document.querySelector("h1")
 let input_value = document.querySelector(".add-todo input");
 let add_todo = document.querySelector(".add-todo button");
 let todo_list = document.querySelector(".todoList .items");
@@ -7,14 +8,44 @@ let no_task_box = document.querySelector(".todoList h3")
 let right = document.querySelector(".footer button")
 
 var tasksContainer = { tasks: [] };
+var user_name = {name: ""}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    if(!localStorage.getItem("visited")) {
+        user_name.name = prompt("Xin hỏi thí chủ tên ạ ^^");
+        alert(`Xin chào ${user_name.name} đến với ứng dụng todoList của mình! Chúc bạn có trải nghiệm tốt^^.`)
+        if(user_name.name.toLowerCase() == "quynh" || user_name.name.toLowerCase() == "quỳnh") {
+            alert("À mà khoan riêng Quỳnh anh hỏi thêm nữa mới được vào nhé 🤪")
+            var pin = prompt("Nhập mã pin: ")
+            if(pin == "1999") {
+                while(true) {
+                    var isHandsome = confirm("Anh có đẹp trai không?")
+                    if(isHandsome == true) {
+                        alert("Yêu em 😘😘😘")
+                        break;
+                    } else {
+                        alert("Saiiiiiiiiiiiiiiiiiiiiiii")
+                    }
+                }
+            }
+    
+        }
+        header.innerText = `TODOLIST Của ${user_name.name}`;
+        localStorage.setItem("visited", "true");
+        localStorage.setItem('user_name', user_name.name);
+    }
+});
 
 
+
+//reload DOM
 var reloadDOM = (tasks) => {
     if(start == 0) {
         var tasksJSON = localStorage.getItem('tasks');
         if(tasksJSON) {
             tasksContainer.tasks = JSON.parse(tasksJSON); 
         }
+        user_name.name = localStorage.getItem('user_name')
     }
     let html_todo = "";
     let number_todo_finish = 0;
@@ -42,6 +73,7 @@ var reloadDOM = (tasks) => {
             </div>`
         })
     }
+    header.innerText = `TODOLIST Của ${user_name.name}`;   
     todo_list.innerHTML = html_todo;
     left_box_footer.innerHTML = `<strong>${number_todo_finish}</strong> of <strong>${tasks_length}</strong> tasks done`;
     let color_percent = (number_todo_finish/tasks_length)*100
@@ -81,6 +113,8 @@ var reloadDOM = (tasks) => {
 
 }
 
+
+//start
 let start = 0;
 reloadDOM(tasksContainer);
 

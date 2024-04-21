@@ -25,6 +25,9 @@ body {
 }
 #main .container .cover .header h1 {
   text-align: center;
+  font-size: 25px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
 }
 #main .container .cover .add-todo {
   display: flex;
